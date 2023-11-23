@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite + htmx</title>
   </head>
-  <body hx-ext="debug,preload">
-    <a href="" hx-post="/test"  hx-trigger="mouseenter once" preload="mouseover">Mouseover to trigger preload</a>
+  <body>
+    <a hx-ext="debug" href="" hx-post="/test"  hx-trigger="mouseenter once" preload="mouseover">Mouseover to trigger preload</a>
 
     <script async type="module" src="/src/main.ts"></script>
   </body>
