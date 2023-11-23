@@ -1,13 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + htmx</title>
-  </head>
-  <body>
-    <a hx-ext="debug" href="" hx-post="/test"  hx-trigger="mouseenter once" preload="mouseover">Mouseover to trigger preload</a>
 
-    <script async type="module" src="/src/main.ts"></script>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vite + htmx</title>
+</head>
+
+<body>
+  <a hx-ext="debug" href="" hx-post="/api/testers" hx-target="#swap-target" hx-trigger="mouseenter" hx-boost="true">Mouseover
+    to trigger preload</a>
+  <div id="swap-target"></div>
+  <script async type="module" src="/src/main.ts"></script>
+</body>
+
 </html>
