@@ -14,7 +14,7 @@ export const renderer = jsxRenderer(({ children }) => {
       </head>
       <body>
         <div class="p-4">
-          <h1 class="text-4xl font-bold mb-4"><a href="/">something</a></h1>
+          <h1 class="text-4xl font-bold mb-4"><a href="/">Form</a></h1>
           ${children}
         </div>
       </body>

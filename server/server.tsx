@@ -31,4 +31,11 @@ app.post(
   },
 );
 
+app.delete('/something/:id', (c) => {
+  const id = c.req.param('id');
+  console.log(id);
+  c.status(200);
+  return c.body(null);
+});
+
 export default app;
