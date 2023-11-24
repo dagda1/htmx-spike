@@ -8,7 +8,7 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "server": "PORT=4400 nodemon --watch ./server/server.mts --exec ts-node --esm ./server/server.mts",
+    "server": "PORT=4400 nodemon --watch ./server/server.mts --exec ts-node --esm ./server/server.mtsx",
     "start": "concurrently \"npm run server\" \"npm run dev\""
   },
   "keywords": [
@@ -18,17 +18,18 @@
   "license": "ISC",
   "dependencies": {
     "@cutting/eslint-config": "^4.45.2",
-    "@cutting/tsconfig": "^4.40.3",
     "@cutting/useful-types": "^4.40.2",
-    "cors": "^2.8.5",
-    "express": "^4.18.2",
-    "htmx.org": "^1.9.9"
+    "@hono/zod-validator": "^0.1.11",
+    "hono": "^3.10.2",
+    "htmx.org": "^1.9.9",
+    "tailwind": "^4.0.0",
+    "zod": "^3.22.4"
   },
   "devDependencies": {
     "@cutting/eslint-config": "4.45.2",
+    "@cutting/tsconfig": "^4.40.3",
+    "@hono/vite-dev-server": "^0.3.0",
     "@rollup/plugin-inject": "^5.0.5",
-    "@types/cors": "^2.8.17",
-    "@types/express": "^4.17.21",
     "concurrently": "^8.2.2",
     "nodemon": "^3.0.1",
     "ts-node": "^10.9.1",
