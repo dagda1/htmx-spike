@@ -7,7 +7,12 @@ const app = new Hono();
 app.get('*', renderer);
 
 app.get('/', (c) => {
-  return c.render(<Calendar />);
+  c.header('')
+  return c.render(
+    <>
+      <Calendar />
+    </>,
+  );
 });
 
 export default app;

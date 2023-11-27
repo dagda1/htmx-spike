@@ -82,7 +82,7 @@ export default {
         },
       },
       fontFamily: {
-        sans: [...defaultTheme.fontFamily.sans],
+        sans: ['Inter var', ...defaultTheme.fontFamily.sans],
       },
       zIndex: {
         '-10': '-10',

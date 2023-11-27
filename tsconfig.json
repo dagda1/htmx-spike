@@ -3,12 +3,12 @@
   "compilerOptions": {
     "baseUrl": ".",
     "rootDirs": ["app", "server"],
+    "types": ["vite/client"],
     "jsx": "react-jsx",
     "jsxImportSource": "hono/jsx",
     "paths": {
-      "@app/*": ["./app/*"],
       "@server/*": ["./server/*"]
     }
   },
-  "include": ["app/**/*.tsx", "app/**/*.ts", "server/**/*.tsx", "server/**/*.ts"]
+  "include": ["server/**/*.tsx", "server/**/*.ts"]
 }
