@@ -1,12 +1,14 @@
 {
   "extends": "@cutting/tsconfig",
   "compilerOptions": {
-    "rootDirs": ["src", "server"],
-    "types": [
-      "@cloudflare/workers-types"
-    ],
+    "baseUrl": ".",
+    "rootDirs": ["app", "server"],
     "jsx": "react-jsx",
-    "jsxImportSource": "hono/jsx"
+    "jsxImportSource": "hono/jsx",
+    "paths": {
+      "@app/*": ["./app/*"],
+      "@server/*": ["./server/*"]
+    }
   },
-  "include": ["src", "server/**/*.tsx", "server/**/*.ts"]
+  "include": ["app/**/*.tsx", "app/**/*.ts", "server/**/*.tsx", "server/**/*.ts"]
 }

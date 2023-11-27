@@ -1,5 +1,6 @@
 import { defineConfig } from 'vite';
 import devServer from '@hono/vite-dev-server';
+import tsconfigPaths from 'vite-tsconfig-paths';
 
 export default defineConfig({
   esbuild: {
@@ -7,6 +8,7 @@ export default defineConfig({
     include: ['server/**/*.tsx'],
   },
   plugins: [
+    tsconfigPaths(),
     devServer({
       entry: 'server/server.tsx',
       exclude: ['src'],
