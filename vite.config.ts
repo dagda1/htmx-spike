@@ -14,12 +14,12 @@ export default defineConfig({
   },
   esbuild: {
     loader: 'tsx',
-    include: ['server/**/*.tsx'],
+    include: ['app/**/*.tsx', 'app/**/*.ts'],
   },
   plugins: [
     tsconfigPaths(),
     devServer({
-      entry: 'server/server.tsx',
+      entry: 'app/server.tsx',
     }),
   ],
 });

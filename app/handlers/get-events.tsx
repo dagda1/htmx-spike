@@ -1,13 +1,13 @@
 import { parseShortDate } from '@/utils/dates';
-import WeekCalendar from './WeekCalendar';
 import { DateTime } from 'luxon';
-import type { Context } from 'hono';
+import WeekCalendar from '@/components/Calendar/WeekCalendar';
+import type { HandlerContext } from '@/types';
 
-export function Calendar(c: Context): JSX.Element {
+export async function getEvents(c: HandlerContext): Promise<Response> {
   // const trigger = c.req.header('HX-Trigger');
   const requestedDate = parseShortDate(c.req.query('date') ?? '') ?? new Date();
   const startDate = DateTime.fromJSDate(requestedDate).startOf('week');
   // const endDate = startDate.plus({ weeks: 1 });
 
-  return <WeekCalendar startDate={startDate.toJSDate()} events={[]} />;
+  return c.html(<WeekCalendar startDate={startDate.toJSDate()} events={[]} />);
 }
