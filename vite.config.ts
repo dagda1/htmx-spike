@@ -9,8 +9,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 export default defineConfig({
   resolve: {
     alias: {
-      '@app': path.join(__dirname, 'app'),
-      '@server': path.join(__dirname, 'server'),
+      '@': path.join(__dirname, 'app'),
     },
   },
   esbuild: {

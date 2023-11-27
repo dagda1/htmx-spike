@@ -7,7 +7,6 @@ const app = new Hono();
 app.get('*', renderer);
 
 app.get('/', (c) => {
-  c.header('')
   return c.render(
     <>
       <Calendar />

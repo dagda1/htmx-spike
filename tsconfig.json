@@ -2,13 +2,13 @@
   "extends": "@cutting/tsconfig",
   "compilerOptions": {
     "baseUrl": ".",
-    "rootDirs": ["app", "server"],
+    "rootDir": "app",
     "types": ["vite/client"],
     "jsx": "react-jsx",
     "jsxImportSource": "hono/jsx",
     "paths": {
-      "@server/*": ["./server/*"]
+      "@/*": ["app/*"]
     }
   },
-  "include": ["server/**/*.tsx", "server/**/*.ts"]
+  "include": ["app/**/*.tsx", "app/**/*.ts"]
 }

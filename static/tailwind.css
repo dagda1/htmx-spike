@@ -4,7 +4,3 @@
 /* purgecss end ignore */
 
 @tailwind utilities;
-
-body {
-  border: 10px solid green;
-}
