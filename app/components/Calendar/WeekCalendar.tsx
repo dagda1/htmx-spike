@@ -1,8 +1,8 @@
 import type { CalendarEvent } from '@/components/Calendar/models/event';
 // import WeekNavigation from '@/components/Calendar/WeekNavigation';
-// import DayCalendar from '@/components/Calendar/DayCalendar';
-// import { mapRange } from '@/utils/arrays';
-// import { formatHour, isToday } from '@/utils/dates';
+import DayCalendar from '@/components/Calendar/DayCalendar';
+import { mapRange } from '@/utils/arrays';
+import { isToday } from '@/utils/dates';
 import { DateTime } from 'luxon';
 import { DefaultDateFormat, LongMonth, LongYear } from '@/constants';
 
@@ -57,23 +57,23 @@ function WeekCalendar({ startDate, events }: WeekCalendarProps): JSX.Element {
             );
           })}
         </div>
-        {mapRange(7, (dayOffset) => {
-          const day = DateTime.fromJSDate(startDate).plus({ days: dayOffset });
-          const dayEvents = events
-            .filter((e) => DateTime.fromJSDate(e.startDay).weekday === day.weekday)
-            .sort((a, b) => a.startHour + a.startMinute - (b.startHour + b.startMinute));
-          return (
-            <div class="day-column">
-              <div class="day-column-header">
-                <span>{day.toFormat('EEE')}</span>
-                <span className={isToday(day.toJSDate()) ? 'today-date' : null}>{day.toFormat('d')}</span>
-              </div>
-              <div class="day-column-content">
-                <DayCalendar startDate={day.toJSDate()} events={dayEvents} />
-              </div>
+      {mapRange(7, (dayOffset) => {
+        const day = DateTime.fromJSDate(startDate).plus({ days: dayOffset });
+        const dayEvents = events
+          .filter((e) => DateTime.fromJSDate(e.startDay).weekday === day.weekday)
+          .sort((a, b) => a.startHour + a.startMinute - (b.startHour + b.startMinute));
+        return (
+          <div class="day-column">
+            <div class="day-column-header">
+              <span>{day.toFormat('ccc d')}</span>
+              <span className={isToday(day.toJSDate()) ? 'today-date' : null}>{day.toFormat('d')}</span>
             </div>
-          );
-        })}*/}
+            <div class="day-column-content">
+              <DayCalendar startDate={day.toJSDate()} events={dayEvents} />
+            </div>
+          </div>
+        );
+      })}*/}
       <div class="flex h-full flex-col">
         <header class="flex flex-none items-center justify-between border-b border-gray-200 px-6 py-4">
           <h1 class="text-base font-semibold leading-6 text-gray-900">
@@ -147,7 +147,7 @@ function WeekCalendar({ startDate, events }: WeekCalendarProps): JSX.Element {
               To: "transform opacity-0 scale-95"
           -->*/}
                 <div
-                  class="absolute right-0 z-10 mt-3 w-36 origin-top-right overflow-hidden rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+                  class="absolute right-0 z-10 mt-3 w-36 origin-top-right overflow-hidden rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none hidden"
                   role="menu"
                   aria-orientation="vertical"
                   aria-labelledby="menu-button"
@@ -330,151 +330,185 @@ function WeekCalendar({ startDate, events }: WeekCalendarProps): JSX.Element {
 
               <div class="-mr-px hidden grid-cols-7 divide-x divide-gray-100 border-r border-gray-100 text-sm leading-6 text-gray-500 sm:grid">
                 <div class="col-end-1 w-14"></div>
-                <div class="flex items-center justify-center py-3">
-                  <span>
-                    Mon <span class="items-center justify-center font-semibold text-gray-900">10</span>
-                  </span>
-                </div>
-                <div class="flex items-center justify-center py-3">
-                  <span>
-                    Tue <span class="items-center justify-center font-semibold text-gray-900">11</span>
-                  </span>
-                </div>
-                <div class="flex items-center justify-center py-3">
-                  <span class="flex items-baseline">
-                    Wed{' '}
-                    <span class="ml-1.5 flex h-8 w-8 items-center justify-center rounded-full bg-indigo-600 font-semibold text-white">
-                      12
-                    </span>
-                  </span>
-                </div>
-                <div class="flex items-center justify-center py-3">
-                  <span>
-                    Thu <span class="items-center justify-center font-semibold text-gray-900">13</span>
-                  </span>
-                </div>
-                <div class="flex items-center justify-center py-3">
-                  <span>
-                    Fri <span class="items-center justify-center font-semibold text-gray-900">14</span>
-                  </span>
-                </div>
-                <div class="flex items-center justify-center py-3">
-                  <span>
-                    Sat <span class="items-center justify-center font-semibold text-gray-900">15</span>
-                  </span>
-                </div>
-                <div class="flex items-center justify-center py-3">
-                  <span>
-                    Sun <span class="items-center justify-center font-semibold text-gray-900">16</span>
-                  </span>
-                </div>
+                {mapRange(7, (dayOffset) => {
+                  const day = DateTime.fromJSDate(startDate).plus({ days: dayOffset });
+                  const dayEvents = events
+                    .filter((e) => DateTime.fromJSDate(e.startDay).weekday === day.weekday)
+                    .sort((a, b) => a.startHour + a.startMinute - (b.startHour + b.startMinute));
+                  return (
+                    <div class="flex items-center justify-center py-3">
+                      {/* <div class="day-column-header">
+                        <span>{day.toFormat('ccc d')}</span>
+                        <span className={isToday(day.toJSDate()) ? 'today-date' : null}>{day.toFormat('d')}</span>
+                      </div> */}
+                      <span>
+                        {day.toFormat('ccc')}{' '}
+                        <span class="items-center justify-center font-semibold text-gray-900">{day.toFormat('d')}</span>
+                      </span>
+                      <div class="day-column-content">
+                        <DayCalendar startDate={day.toJSDate()} events={dayEvents} />
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
             </div>
             <div class="flex flex-auto">
               <div class="sticky left-0 z-10 w-14 flex-none bg-white ring-1 ring-gray-100"></div>
               <div class="grid flex-auto grid-cols-1 grid-rows-1">
-                {/* Horizontal lines -->
-          <div class="col-start-1 col-end-2 row-start-1 grid divide-y divide-gray-100" style="grid-template-rows: repeat(48, minmax(3.5rem, 1fr))">
-            <div class="row-end-1 h-7"></div>
-            <div>
-              <div class="sticky left-0 z-20 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">12AM</div>
-            </div>
-            <div></div>
-            <div>
-              <div class="sticky left-0 z-20 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">1AM</div>
-            </div>
-            <div></div>
-            <div>
-              <div class="sticky left-0 z-20 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">2AM</div>
-            </div>
-            <div></div>
-            <div>
-              <div class="sticky left-0 z-20 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">3AM</div>
-            </div>
-            <div></div>
-            <div>
-              <div class="sticky left-0 z-20 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">4AM</div>
-            </div>
-            <div></div>
-            <div>
-              <div class="sticky left-0 z-20 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">5AM</div>
-            </div>
-            <div></div>
-            <div>
-              <div class="sticky left-0 z-20 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">6AM</div>
-            </div>
-            <div></div>
-            <div>
-              <div class="sticky left-0 z-20 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">7AM</div>
-            </div>
-            <div></div>
-            <div>
-              <div class="sticky left-0 z-20 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">8AM</div>
-            </div>
-            <div></div>
-            <div>
-              <div class="sticky left-0 z-20 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">9AM</div>
-            </div>
-            <div></div>
-            <div>
-              <div class="sticky left-0 z-20 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">10AM</div>
-            </div>
-            <div></div>
-            <div>
-              <div class="sticky left-0 z-20 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">11AM</div>
-            </div>
-            <div></div>
-            <div>
-              <div class="sticky left-0 z-20 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">12PM</div>
-            </div>
-            <div></div>
-            <div>
-              <div class="sticky left-0 z-20 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">1PM</div>
-            </div>
-            <div></div>
-            <div>
-              <div class="sticky left-0 z-20 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">2PM</div>
-            </div>
-            <div></div>
-            <div>
-              <div class="sticky left-0 z-20 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">3PM</div>
-            </div>
-            <div></div>
-            <div>
-              <div class="sticky left-0 z-20 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">4PM</div>
-            </div>
-            <div></div>
-            <div>
-              <div class="sticky left-0 z-20 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">5PM</div>
-            </div>
-            <div></div>
-            <div>
-              <div class="sticky left-0 z-20 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">6PM</div>
-            </div>
-            <div></div>
-            <div>
-              <div class="sticky left-0 z-20 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">7PM</div>
-            </div>
-            <div></div>
-            <div>
-              <div class="sticky left-0 z-20 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">8PM</div>
-            </div>
-            <div></div>
-            <div>
-              <div class="sticky left-0 z-20 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">9PM</div>
-            </div>
-            <div></div>
-            <div>
-              <div class="sticky left-0 z-20 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">10PM</div>
-            </div>
-            <div></div>
-            <div>
-              <div class="sticky left-0 z-20 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">11PM</div>
-            </div>
-            <div></div>
-          </div>
+                {/* Horizontal lines */}
+                <div
+                  class="col-start-1 col-end-2 row-start-1 grid divide-y divide-gray-100"
+                  style="grid-template-rows: repeat(48, minmax(3.5rem, 1fr))"
+                >
+                  <div class="row-end-1 h-7"></div>
+                  <div>
+                    <div class="sticky left-0 z-20 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">
+                      12AM
+                    </div>
+                  </div>
+                  <div></div>
+                  <div>
+                    <div class="sticky left-0 z-20 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">
+                      1AM
+                    </div>
+                  </div>
+                  <div></div>
+                  <div>
+                    <div class="sticky left-0 z-20 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">
+                      2AM
+                    </div>
+                  </div>
+                  <div></div>
+                  <div>
+                    <div class="sticky left-0 z-20 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">
+                      3AM
+                    </div>
+                  </div>
+                  <div></div>
+                  <div>
+                    <div class="sticky left-0 z-20 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">
+                      4AM
+                    </div>
+                  </div>
+                  <div></div>
+                  <div>
+                    <div class="sticky left-0 z-20 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">
+                      5AM
+                    </div>
+                  </div>
+                  <div></div>
+                  <div>
+                    <div class="sticky left-0 z-20 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">
+                      6AM
+                    </div>
+                  </div>
+                  <div></div>
+                  <div>
+                    <div class="sticky left-0 z-20 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">
+                      7AM
+                    </div>
+                  </div>
+                  <div></div>
+                  <div>
+                    <div class="sticky left-0 z-20 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">
+                      8AM
+                    </div>
+                  </div>
+                  <div></div>
+                  <div>
+                    <div class="sticky left-0 z-20 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">
+                      9AM
+                    </div>
+                  </div>
+                  <div></div>
+                  <div>
+                    <div class="sticky left-0 z-20 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">
+                      10AM
+                    </div>
+                  </div>
+                  <div></div>
+                  <div>
+                    <div class="sticky left-0 z-20 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">
+                      11AM
+                    </div>
+                  </div>
+                  <div></div>
+                  <div>
+                    <div class="sticky left-0 z-20 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">
+                      12PM
+                    </div>
+                  </div>
+                  <div></div>
+                  <div>
+                    <div class="sticky left-0 z-20 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">
+                      1PM
+                    </div>
+                  </div>
+                  <div></div>
+                  <div>
+                    <div class="sticky left-0 z-20 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">
+                      2PM
+                    </div>
+                  </div>
+                  <div></div>
+                  <div>
+                    <div class="sticky left-0 z-20 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">
+                      3PM
+                    </div>
+                  </div>
+                  <div></div>
+                  <div>
+                    <div class="sticky left-0 z-20 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">
+                      4PM
+                    </div>
+                  </div>
+                  <div></div>
+                  <div>
+                    <div class="sticky left-0 z-20 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">
+                      5PM
+                    </div>
+                  </div>
+                  <div></div>
+                  <div>
+                    <div class="sticky left-0 z-20 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">
+                      6PM
+                    </div>
+                  </div>
+                  <div></div>
+                  <div>
+                    <div class="sticky left-0 z-20 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">
+                      7PM
+                    </div>
+                  </div>
+                  <div></div>
+                  <div>
+                    <div class="sticky left-0 z-20 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">
+                      8PM
+                    </div>
+                  </div>
+                  <div></div>
+                  <div>
+                    <div class="sticky left-0 z-20 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">
+                      9PM
+                    </div>
+                  </div>
+                  <div></div>
+                  <div>
+                    <div class="sticky left-0 z-20 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">
+                      10PM
+                    </div>
+                  </div>
+                  <div></div>
+                  <div>
+                    <div class="sticky left-0 z-20 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">
+                      11PM
+                    </div>
+                  </div>
+                  <div></div>
+                </div>
 
-          {/* Vertical lines -->*/}
+                {/* Vertical lines -->*/}
                 <div class="col-start-1 col-end-2 row-start-1 hidden grid-cols-7 grid-rows-1 divide-x divide-gray-100 sm:grid sm:grid-cols-7">
                   <div class="col-start-1 row-span-full"></div>
                   <div class="col-start-2 row-span-full"></div>
