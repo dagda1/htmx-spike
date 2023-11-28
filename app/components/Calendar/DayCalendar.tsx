@@ -13,8 +13,6 @@ function DayCalendar({ startDate, events }: DayCalendarProps): JSX.Element {
 
   const allDayEvents = events.filter((e) => e.allDay);
 
-  console.log({ startDate });
-
   return (
     <div class="hour-grid">
       <div class={`${cellClass} all-day-cell`}>

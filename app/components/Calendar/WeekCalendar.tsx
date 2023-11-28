@@ -2,10 +2,11 @@ import type { CalendarEvent } from '@/components/Calendar/models/event';
 // import WeekNavigation from '@/components/Calendar/WeekNavigation';
 import DayCalendar from '@/components/Calendar/DayCalendar';
 import { mapRange } from '@/utils/arrays';
-// import { isToday } from '@/utils/dates';
+import { isToday } from '@/utils/dates';
 import { DateTime } from 'luxon';
 import { DefaultDateFormat, LongMonth, LongYear } from '@/constants';
 import { formatHour } from '@/utils/dates';
+import cs from 'classnames';
 
 export interface WeekCalendarProps {
   startDate: Date;
@@ -14,7 +15,6 @@ export interface WeekCalendarProps {
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function WeekCalendar({ startDate, events }: WeekCalendarProps): JSX.Element {
-  console.log(startDate);
   const start = DateTime.fromJSDate(startDate);
   const monthName = start.toFormat(LongMonth);
   const year = start.toFormat(LongYear);
@@ -303,30 +303,24 @@ function WeekCalendar({ startDate, events }: WeekCalendarProps): JSX.Element {
           <div style="width: 165%" class="flex max-w-full flex-none flex-col sm:max-w-none md:max-w-full">
             <div class="sticky top-0 z-30 flex-none bg-white shadow ring-1 ring-black ring-opacity-5 sm:pr-8">
               <div class="grid grid-cols-7 text-sm leading-6 text-gray-500 sm:hidden">
-                <button type="button" class="flex flex-col items-center pb-3 pt-2">
-                  M <span class="mt-1 flex h-8 w-8 items-center justify-center font-semibold text-gray-900">10</span>
-                </button>
-                <button type="button" class="flex flex-col items-center pb-3 pt-2">
-                  T <span class="mt-1 flex h-8 w-8 items-center justify-center font-semibold text-gray-900">11</span>
-                </button>
-                <button type="button" class="flex flex-col items-center pb-3 pt-2">
-                  W{' '}
-                  <span class="mt-1 flex h-8 w-8 items-center justify-center rounded-full bg-indigo-600 font-semibold text-white">
-                    12
-                  </span>
-                </button>
-                <button type="button" class="flex flex-col items-center pb-3 pt-2">
-                  T <span class="mt-1 flex h-8 w-8 items-center justify-center font-semibold text-gray-900">13</span>
-                </button>
-                <button type="button" class="flex flex-col items-center pb-3 pt-2">
-                  F <span class="mt-1 flex h-8 w-8 items-center justify-center font-semibold text-gray-900">14</span>
-                </button>
-                <button type="button" class="flex flex-col items-center pb-3 pt-2">
-                  S <span class="mt-1 flex h-8 w-8 items-center justify-center font-semibold text-gray-900">15</span>
-                </button>
-                <button type="button" class="flex flex-col items-center pb-3 pt-2">
-                  S <span class="mt-1 flex h-8 w-8 items-center justify-center font-semibold text-gray-900">16</span>
-                </button>
+                {mapRange(7, (dayOffset) => {
+                  const day = DateTime.fromJSDate(startDate).plus({ days: dayOffset });
+
+                  const today = isToday(day.toJSDate());
+                  return (
+                    <button type="button" class="flex flex-col items-center pb-3 pt-2">
+                      {day.toFormat('ccc').charAt(0)}{' '}
+                      <span
+                        class={cs({
+                          ['mt-1 flex h-8 w-8 items-center justify-center font-semibold text-gray-900']: !today,
+                          ['rounded-full bg-indigo-600 mt-1 flex h-8 w-8 text-white']: today,
+                        })}
+                      >
+                        {day.toFormat('d')}
+                      </span>
+                    </button>
+                  );
+                })}
               </div>
 
               <div class="-mr-px hidden grid-cols-7 divide-x divide-gray-100 border-r border-gray-100 text-sm leading-6 text-gray-500 sm:grid">
@@ -336,15 +330,22 @@ function WeekCalendar({ startDate, events }: WeekCalendarProps): JSX.Element {
                   const dayEvents = events
                     .filter((e) => DateTime.fromJSDate(e.startDay).weekday === day.weekday)
                     .sort((a, b) => a.startHour + a.startMinute - (b.startHour + b.startMinute));
+
+                  const today = isToday(day.toJSDate());
+
                   return (
                     <div class="flex items-center justify-center py-3">
-                      {/* <div class="day-column-header">
-                        <span>{day.toFormat('ccc d')}</span>
-                        <span className={isToday(day.toJSDate()) ? 'today-date' : null}>{day.toFormat('d')}</span>
-                      </div> */}
-                      <span>
+                      <span class={cs(today && 'flex items-baseline')}>
                         {day.toFormat('ccc')}{' '}
-                        <span class="items-center justify-center font-semibold text-gray-900">{day.toFormat('d')}</span>
+                        <span
+                          class={cs({
+                            ['items-center justify-center font-semibold text-gray-900']: !today,
+                            ['ml-1.5 flex h-8 w-8 items-center justify-center rounded-full bg-indigo-600 font-semibold text-white']:
+                              today,
+                          })}
+                        >
+                          {day.toFormat('d')}
+                        </span>
                       </span>
                       <div class="day-column-content">
                         <DayCalendar startDate={day.toJSDate()} events={dayEvents} />
