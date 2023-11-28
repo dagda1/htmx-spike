@@ -2,9 +2,10 @@ import type { CalendarEvent } from '@/components/Calendar/models/event';
 // import WeekNavigation from '@/components/Calendar/WeekNavigation';
 import DayCalendar from '@/components/Calendar/DayCalendar';
 import { mapRange } from '@/utils/arrays';
-import { isToday } from '@/utils/dates';
+// import { isToday } from '@/utils/dates';
 import { DateTime } from 'luxon';
 import { DefaultDateFormat, LongMonth, LongYear } from '@/constants';
+import { formatHour } from '@/utils/dates';
 
 export interface WeekCalendarProps {
   startDate: Date;
@@ -227,7 +228,7 @@ function WeekCalendar({ startDate, events }: WeekCalendarProps): JSX.Element {
             To: "transform opacity-0 scale-95"
         -->*/}
               <div
-                class="absolute right-0 z-10 mt-3 w-36 origin-top-right divide-y divide-gray-100 overflow-hidden rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+                class="absolute right-0 z-10 mt-3 w-36 origin-top-right divide-y divide-gray-100 overflow-hidden rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none hidden"
                 role="menu"
                 aria-orientation="vertical"
                 aria-labelledby="menu-0-button"
@@ -362,150 +363,16 @@ function WeekCalendar({ startDate, events }: WeekCalendarProps): JSX.Element {
                   style="grid-template-rows: repeat(48, minmax(3.5rem, 1fr))"
                 >
                   <div class="row-end-1 h-7"></div>
-                  <div>
-                    <div class="sticky left-0 z-20 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">
-                      12AM
-                    </div>
-                  </div>
-                  <div></div>
-                  <div>
-                    <div class="sticky left-0 z-20 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">
-                      1AM
-                    </div>
-                  </div>
-                  <div></div>
-                  <div>
-                    <div class="sticky left-0 z-20 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">
-                      2AM
-                    </div>
-                  </div>
-                  <div></div>
-                  <div>
-                    <div class="sticky left-0 z-20 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">
-                      3AM
-                    </div>
-                  </div>
-                  <div></div>
-                  <div>
-                    <div class="sticky left-0 z-20 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">
-                      4AM
-                    </div>
-                  </div>
-                  <div></div>
-                  <div>
-                    <div class="sticky left-0 z-20 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">
-                      5AM
-                    </div>
-                  </div>
-                  <div></div>
-                  <div>
-                    <div class="sticky left-0 z-20 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">
-                      6AM
-                    </div>
-                  </div>
-                  <div></div>
-                  <div>
-                    <div class="sticky left-0 z-20 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">
-                      7AM
-                    </div>
-                  </div>
-                  <div></div>
-                  <div>
-                    <div class="sticky left-0 z-20 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">
-                      8AM
-                    </div>
-                  </div>
-                  <div></div>
-                  <div>
-                    <div class="sticky left-0 z-20 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">
-                      9AM
-                    </div>
-                  </div>
-                  <div></div>
-                  <div>
-                    <div class="sticky left-0 z-20 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">
-                      10AM
-                    </div>
-                  </div>
-                  <div></div>
-                  <div>
-                    <div class="sticky left-0 z-20 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">
-                      11AM
-                    </div>
-                  </div>
-                  <div></div>
-                  <div>
-                    <div class="sticky left-0 z-20 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">
-                      12PM
-                    </div>
-                  </div>
-                  <div></div>
-                  <div>
-                    <div class="sticky left-0 z-20 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">
-                      1PM
-                    </div>
-                  </div>
-                  <div></div>
-                  <div>
-                    <div class="sticky left-0 z-20 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">
-                      2PM
-                    </div>
-                  </div>
-                  <div></div>
-                  <div>
-                    <div class="sticky left-0 z-20 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">
-                      3PM
-                    </div>
-                  </div>
-                  <div></div>
-                  <div>
-                    <div class="sticky left-0 z-20 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">
-                      4PM
-                    </div>
-                  </div>
-                  <div></div>
-                  <div>
-                    <div class="sticky left-0 z-20 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">
-                      5PM
-                    </div>
-                  </div>
-                  <div></div>
-                  <div>
-                    <div class="sticky left-0 z-20 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">
-                      6PM
-                    </div>
-                  </div>
-                  <div></div>
-                  <div>
-                    <div class="sticky left-0 z-20 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">
-                      7PM
-                    </div>
-                  </div>
-                  <div></div>
-                  <div>
-                    <div class="sticky left-0 z-20 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">
-                      8PM
-                    </div>
-                  </div>
-                  <div></div>
-                  <div>
-                    <div class="sticky left-0 z-20 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">
-                      9PM
-                    </div>
-                  </div>
-                  <div></div>
-                  <div>
-                    <div class="sticky left-0 z-20 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">
-                      10PM
-                    </div>
-                  </div>
-                  <div></div>
-                  <div>
-                    <div class="sticky left-0 z-20 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">
-                      11PM
-                    </div>
-                  </div>
-                  <div></div>
+                  {mapRange(24, (hour) => {
+                    return (
+                      <>
+                        <div class="sticky left-0 z-20 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">
+                          {formatHour(hour)}
+                        </div>
+                        <div></div>
+                      </>
+                    );
+                  })}
                 </div>
 
                 {/* Vertical lines -->*/}
