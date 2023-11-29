@@ -313,7 +313,8 @@ function WeekCalendar({ startDate, events }: WeekCalendarProps): JSX.Element {
                       <span
                         class={cs({
                           ['mt-1 flex h-8 w-8 items-center justify-center font-semibold text-gray-900']: !today,
-                          ['rounded-full bg-indigo-600 mt-1 flex h-8 w-8 text-white']: today,
+                          ['mt-1 flex h-8 w-8 items-center justify-center rounded-full bg-indigo-600 font-semibold text-white']:
+                            today,
                         })}
                       >
                         {day.toFormat('d')}
