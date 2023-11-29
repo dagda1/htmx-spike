@@ -18,7 +18,7 @@ export function AppShell({ children }: LayoutProps): JSX.Element {
         <link rel="stylesheet" href="/static/tailwind.css" />
         <meta name="description" content="Developer Events" />
       </head>
-      <body class="h-full">
+      <body class="h-full" hx-boost="true">
         <PageLayout>{children}</PageLayout>
       </body>
     </html>
