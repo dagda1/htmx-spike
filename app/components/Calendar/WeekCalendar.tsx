@@ -27,8 +27,9 @@ function WeekCalendar({ startDate, events }: WeekCalendarProps): JSX.Element {
       id="calendar"
       class="week-calendar"
       hx-get={`/events?date=${dateString}`}
-      hx-swap="outerHTML"
+      hx-swap="morph:innerHTML"
       hx-trigger="calendar:eventsChanged from:body"
+      hx-select="#calendar"
     >
       {/* <div class="month-year-header">
           <span class="month-label">{monthName}</span>
