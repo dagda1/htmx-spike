@@ -1,6 +1,10 @@
 import { ViewSelectorItem } from './ViewSelectorItem';
+import { useRequestContext } from 'hono/jsx-renderer';
 
 export function ViewSelector(): JSX.Element {
+  const c = useRequestContext();
+
+  console.log(c.req.url);
   return (
     <div class="relative">
       <button
