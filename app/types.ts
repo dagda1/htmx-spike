@@ -26,4 +26,5 @@ export type ContextVars = any;
 export interface CalendarProps {
   startDate: Date;
   events: CalendarEvent[];
+  currentView: CalendarView;
 }

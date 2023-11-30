@@ -23,6 +23,26 @@ export function getFirstMonday(requestedDate: Date, currentView: CalendarView): 
   return date.toJSDate();
 }
 
+export function getLast7DaysOfMonth(requestedDate: Date): string[] {
+  const date = DateTime.fromJSDate(requestedDate);
+
+  // Find the last day of the month
+  const lastDayOfMonth = DateTime.local(date.year, date.month).endOf('month');
+
+  // Calculate the last Monday of the month
+  // Luxon uses 1 for Monday, 7 for Sunday
+  const daysToLastMonday = (lastDayOfMonth.weekday - 1) % 7;
+  const lastMonday = lastDayOfMonth.minus({ days: daysToLastMonday });
+
+  // Get the 7-day period starting from this Monday
+  const week = [];
+  for (let i = 0; i < 7; i++) {
+    week.push(lastMonday.plus({ days: i }).toISODate() as string);
+  }
+
+  return week;
+}
+
 export function isToday(date: Date): boolean {
   const startOfToday = DateTime.now().startOf('day');
   const queryDate = DateTime.fromJSDate(date).startOf('day');
