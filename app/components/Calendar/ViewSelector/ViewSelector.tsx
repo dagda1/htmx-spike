@@ -1,13 +1,13 @@
 import type { CalendarView } from '~/types';
 import { ViewSelectorItem } from './ViewSelectorItem';
 import { useRequestContext } from 'hono/jsx-renderer';
+import { DefaultView } from '~/constants';
 
 export function ViewSelector(): JSX.Element {
   const context = useRequestContext();
 
-  const currentView = (context.req.query('view') ?? 'Week') as CalendarView;
+  const currentView = (context.req.query('view') ?? DefaultView) as CalendarView;
 
-  console.log(context.req.url);
   return (
     <div class="relative">
       <button

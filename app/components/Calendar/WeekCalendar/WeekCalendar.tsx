@@ -3,18 +3,14 @@ import DayCalendar from '~/components/Calendar/DayCalendar/DayCalendar';
 import { mapRange } from '~/utils/arrays';
 import { isToday } from '~/utils/dates';
 import { DateTime } from 'luxon';
-import { DefaultDateFormat, LongMonth, LongYear } from '~/constants';
+import { DefaultDateFormat } from '~/constants';
 import { formatHour } from '~/utils/dates';
 import cs from 'classnames';
-import WeekNavigation from '../WeekNavigation/WeekNavigation';
-import { ViewSelector } from '../ViewSelector/ViewSelector';
 import type { CalendarProps } from '~/types';
-import { Events } from '../Events/Events';
+import { CalendarHeader } from '../CalendarHeader/CalendarHeader';
 
 function WeekCalendar({ startDate, events }: CalendarProps): JSX.Element {
   const start = DateTime.fromJSDate(startDate);
-  const monthName = start.toFormat(LongMonth);
-  const year = start.toFormat(LongYear);
 
   const dateString = start.toFormat(DefaultDateFormat);
 
@@ -27,36 +23,13 @@ function WeekCalendar({ startDate, events }: CalendarProps): JSX.Element {
       hx-trigger="calendar:eventsChanged from:body"
     >
       <div class="flex h-full flex-col">
-        <header class="flex flex-none items-center justify-between border-b border-gray-200 px-6 py-4">
-          <h1 class="text-base font-semibold leading-6 text-gray-900">
-            <time datetime="2022-01">
-              {monthName} {year}
-            </time>
-          </h1>
-          <div class="flex items-center">
-            <WeekNavigation
-              prevWeek={DateTime.fromJSDate(startDate).plus({ weeks: -1 }).toJSDate()}
-              nextWeek={DateTime.fromJSDate(startDate).plus({ weeks: 1 }).toJSDate()}
-            />
-            <div class="hidden md:ml-4 md:flex md:items-center">
-              <ViewSelector />
-              <div class="ml-6 h-6 w-px bg-gray-300"></div>
-              <button
-                type="button"
-                class="ml-6 rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
-              >
-                Add event
-              </button>
-            </div>
-            <Events />
-          </div>
-        </header>
+        <CalendarHeader startDate={startDate} />
         <div class="isolate flex flex-auto flex-col overflow-auto bg-white">
           <div style="width: 165%" class="flex max-w-full flex-none flex-col sm:max-w-none md:max-w-full">
             <div class="sticky top-0 z-30 flex-none bg-white shadow ring-1 ring-black ring-opacity-5 sm:pr-8">
               <div class="grid grid-cols-7 text-sm leading-6 text-gray-500 sm:hidden">
                 {mapRange(7, (dayOffset) => {
-                  const day = DateTime.fromJSDate(startDate).plus({ days: dayOffset });
+                  const day = start.plus({ days: dayOffset });
 
                   const today = isToday(day.toJSDate());
                   return (
