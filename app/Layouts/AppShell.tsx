@@ -1,4 +1,4 @@
-import { DefaultTitle } from '@/constants';
+import { DefaultTitle } from '~/constants';
 import type { Child } from 'hono/jsx';
 import { PageLayout } from './PageLayout';
 

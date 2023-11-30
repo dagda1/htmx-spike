@@ -1,9 +1,11 @@
 import type { Child } from 'hono/jsx';
+import type { CalendarView } from '~/types';
 
 interface ViewSelectorItemProps {
   children: Child;
+  view: CalendarView;
 }
-export function ViewSelectorItem({ children }: ViewSelectorItemProps): JSX.Element {
+export function ViewSelectorItem({ children, view }: ViewSelectorItemProps): JSX.Element {
   return (
     <a
       href="#"

@@ -1,4 +1,4 @@
-import { DefaultDateFormat } from '@/constants';
+import { DefaultDateFormat } from '~/constants';
 import { DateTime } from 'luxon';
 
 export interface WeekNavigationProps {

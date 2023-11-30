@@ -1,10 +1,13 @@
+import type { CalendarView } from '~/types';
 import { ViewSelectorItem } from './ViewSelectorItem';
 import { useRequestContext } from 'hono/jsx-renderer';
 
 export function ViewSelector(): JSX.Element {
-  const c = useRequestContext();
+  const context = useRequestContext();
 
-  console.log(c.req.url);
+  const currentView = (context.req.query('view') ?? 'Week') as CalendarView;
+
+  console.log(context.req.url);
   return (
     <div class="relative">
       <button
@@ -15,7 +18,7 @@ export function ViewSelector(): JSX.Element {
         aria-haspopup="true"
         _="on click toggle between .opacity-0 and .opacity-100 on #view-dropdown"
       >
-        Week view
+        {currentView} view
         <svg class="-mr-1 h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
           <path
             fill-rule="evenodd"
@@ -33,11 +36,11 @@ export function ViewSelector(): JSX.Element {
         tabIndex="-1"
       >
         <div class="py-1" role="none">
-          <ViewSelectorItem>Day View</ViewSelectorItem>
+          {/* <ViewSelectorItem>Day View</ViewSelectorItem> */}
           {/* Active: "bg-gray-100 text-gray-900", Not Active: "text-gray-700" -->*/}
-          <ViewSelectorItem>Week view</ViewSelectorItem>
-          <ViewSelectorItem>Month view</ViewSelectorItem>
-          <ViewSelectorItem>Year view</ViewSelectorItem>
+          <ViewSelectorItem view="Week">Week view</ViewSelectorItem>
+          <ViewSelectorItem view="Month">Month view</ViewSelectorItem>
+          {/* <ViewSelectorItem>Year view</ViewSelectorItem> */}
         </div>
       </div>
     </div>

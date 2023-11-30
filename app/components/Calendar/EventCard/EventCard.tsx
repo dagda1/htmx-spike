@@ -1,5 +1,5 @@
-import type { CalendarEvent } from '@/components/Calendar/models/event';
-import { formatTime } from '@/utils/dates';
+import type { CalendarEvent } from '~/types';
+import { formatTime } from '~/utils/dates';
 
 export interface EventCardProps {
   event: CalendarEvent;

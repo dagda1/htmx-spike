@@ -1,22 +1,16 @@
-import type { CalendarEvent } from '@/components/Calendar/models/event';
-// import WeekNavigation from '@/components/Calendar/WeekNavigation';
-import DayCalendar from '@/components/Calendar/DayCalendar';
-import { mapRange } from '@/utils/arrays';
-import { isToday } from '@/utils/dates';
+// import WeekNavigation from '~/components/Calendar/WeekNavigation';
+import DayCalendar from '~/components/Calendar/DayCalendar/DayCalendar';
+import { mapRange } from '~/utils/arrays';
+import { isToday } from '~/utils/dates';
 import { DateTime } from 'luxon';
-import { DefaultDateFormat, LongMonth, LongYear } from '@/constants';
-import { formatHour } from '@/utils/dates';
+import { DefaultDateFormat, LongMonth, LongYear } from '~/constants';
+import { formatHour } from '~/utils/dates';
 import cs from 'classnames';
-import WeekNavigation from './WeekNavigation';
-import { ViewSelector } from './ViewSelector/ViewSelector';
+import WeekNavigation from '../WeekNavigation/WeekNavigation';
+import { ViewSelector } from '../ViewSelector/ViewSelector';
+import type { CalendarProps } from '~/types';
 
-export interface WeekCalendarProps {
-  startDate: Date;
-  events: CalendarEvent[];
-}
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-function WeekCalendar({ startDate, events }: WeekCalendarProps): JSX.Element {
+function WeekCalendar({ startDate, events }: CalendarProps): JSX.Element {
   const start = DateTime.fromJSDate(startDate);
   const monthName = start.toFormat(LongMonth);
   const year = start.toFormat(LongYear);

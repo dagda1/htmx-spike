@@ -7,7 +7,7 @@
     "jsx": "react-jsx",
     "jsxImportSource": "hono/jsx",
     "paths": {
-      "@/*": ["app/*"]
+      "~/*": ["app/*"]
     }
   },
   "include": ["app/**/*.tsx", "app/**/*.ts"]

@@ -1,7 +1,7 @@
-import type { CalendarEvent } from '@/components/Calendar/models/event';
-import EventCard from '@/components/Calendar/EventCard';
-import { mapRange } from '@/utils/arrays';
-import { isWeekend } from '@/utils/dates';
+import EventCard from '~/components/Calendar/EventCard/EventCard';
+import type { CalendarEvent } from '~/types';
+import { mapRange } from '~/utils/arrays';
+import { isWeekend } from '~/utils/dates';
 
 export interface DayCalendarProps {
   startDate: Date;
