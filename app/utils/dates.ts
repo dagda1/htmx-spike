@@ -1,4 +1,27 @@
 import { DateTime } from 'luxon';
+import type { CalendarView } from '~/types';
+
+export function getFirstMonday(requestedDate: Date, currentView: CalendarView): Date {
+  const startDate = DateTime.fromJSDate(requestedDate);
+
+  if (currentView === 'Week') {
+    startDate.startOf('week').toJSDate();
+  }
+
+  const month = startDate.month;
+  const year = startDate.year;
+
+  let date = DateTime.local(year, month, 1);
+
+  // Check the weekday of the first day of the month
+  // Luxon uses 1 for Monday
+  // If the first day is not Monday, adjust the date to the previous Monday
+  if (date.weekday !== 1) {
+    date = date.minus({ days: (date.weekday + 6) % 7 });
+  }
+
+  return date.toJSDate();
+}
 
 export function isToday(date: Date): boolean {
   const startOfToday = DateTime.now().startOf('day');

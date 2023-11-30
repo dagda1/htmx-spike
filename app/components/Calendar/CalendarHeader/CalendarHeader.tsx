@@ -22,8 +22,6 @@ export function CalendarHeader({ startDate }: CalendarHeaderProps): JSX.Element 
   const previous = currentView === 'Week' ? { weeks: -1 } : { months: -1 };
   const next = currentView === 'Week' ? { weeks: 1 } : { months: 1 };
 
-  console.log({ previous, next, currentView });
-
   return (
     <header class="flex flex-none items-center justify-between border-b border-gray-200 px-6 py-4">
       <h1 class="text-base font-semibold leading-6 text-gray-900">

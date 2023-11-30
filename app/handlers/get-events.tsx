@@ -6,12 +6,12 @@ export async function getEvents(c: HandlerContext): Promise<Response> {
   const trigger = c.req.header('HX-Trigger');
 
   if (trigger) {
-    return c.render(<Calendar  />);
+    return c.render(<Calendar />);
   }
 
   return c.render(
     <AppShell>
-      <Calendar  />
+      <Calendar />
     </AppShell>,
   );
 }
