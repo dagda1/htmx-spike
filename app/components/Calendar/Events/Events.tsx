@@ -47,12 +47,24 @@ export function Events(): JSX.Element {
         >
           <div class="py-1" role="none">
             {/* Active: "bg-gray-100 text-gray-900", Not Active: "text-gray-700" */}
-            <a href="#" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabIndex="-1" id="menu-0-item-0">
+            <a
+              href="#"
+              class="text-gray-700 block px-4 py-2 text-sm hover:bg-blue-500 hover:text-white hover:border-blue-500 w-full"
+              role="menuitem"
+              tabIndex="-1"
+              id="menu-0-item-0"
+            >
               Create event
             </a>
           </div>
           <div class="py-1" role="none">
-            <a href="#" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabIndex="-1" id="menu-0-item-1">
+            <a
+              href="#"
+              class="text-gray-700 block px-4 py-2 text-sm hover:bg-blue-500 hover:text-white hover:border-blue-500 w-full"
+              role="menuitem"
+              tabIndex="-1"
+              id="menu-0-item-1"
+            >
               Go to today
             </a>
           </div>

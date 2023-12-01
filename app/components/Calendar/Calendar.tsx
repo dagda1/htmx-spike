@@ -3,7 +3,7 @@ import WeekCalendar from './WeekCalendar/WeekCalendar';
 import type { CalendarView } from '~/types';
 import { MonthCalendar } from './MonthCalendar/MonthCalendar';
 import { useRequestContext } from 'hono/jsx-renderer';
-import { DateTime } from 'luxon';
+import { DefaultView } from '~/constants';
 
 const Views: Record<CalendarView, typeof WeekCalendar | typeof MonthCalendar> = {
   ['Week']: WeekCalendar,
@@ -13,13 +13,11 @@ const Views: Record<CalendarView, typeof WeekCalendar | typeof MonthCalendar> = 
 export function Calendar(): JSX.Element {
   const context = useRequestContext();
 
-  const currentView = (context.req.query('view') ?? 'Week') as CalendarView;
+  const currentView = (context.req.query('view') ?? DefaultView) as CalendarView;
 
   const CalendarView = Views[currentView];
 
   const requestedDate = parseShortDate(context.req.query('date') ?? '') ?? new Date();
 
-  const startDate = DateTime.fromJSDate(requestedDate).startOf('week');
-
-  return <CalendarView startDate={startDate.toJSDate()} currentView={currentView} events={[]} />;
+  return <CalendarView startDate={requestedDate} currentView={currentView} events={[]} />;
 }

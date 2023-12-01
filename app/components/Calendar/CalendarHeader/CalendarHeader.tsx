@@ -40,6 +40,9 @@ export function CalendarHeader({ startDate }: CalendarHeaderProps): JSX.Element 
           <button
             type="button"
             class="ml-6 rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
+            hx-get="/events/add"
+            hx-target="body"
+            hx-swap="beforeend"
           >
             Add event
           </button>
