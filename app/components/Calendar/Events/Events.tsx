@@ -1,4 +1,15 @@
+import { useRequestContext } from 'hono/jsx-renderer';
+import { DefaultView } from '~/constants';
+import type { CalendarView } from '~/types';
+import { ViewSelectorItem } from '../ViewSelector/ViewSelectorItem';
+
 export function Events(): JSX.Element {
+  const context = useRequestContext();
+
+  const currentView = (context.req.query('view') ?? DefaultView) as CalendarView;
+
+  console.log(currentView);
+
   return (
     <>
       <div class="relative ml-6 md:hidden">
@@ -8,6 +19,7 @@ export function Events(): JSX.Element {
           id="menu-0-button"
           aria-expanded="false"
           aria-haspopup="true"
+          _="on click toggle between .opacity-0 and .opacity-100 on #mobile-view-dropdown"
         >
           <span class="sr-only">Open menu</span>
           <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -26,7 +38,8 @@ export function Events(): JSX.Element {
             To: "transform opacity-0 scale-95"
         -->*/}
         <div
-          class="absolute right-0 z-10 mt-3 w-36 origin-top-right divide-y divide-gray-100 overflow-hidden rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none hidden"
+          id="mobile-view-dropdown"
+          class="absolute right-0 z-10 mt-3 w-36 origin-top-right divide-y divide-gray-100 overflow-hidden rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none opacity-0"
           role="menu"
           aria-orientation="vertical"
           aria-labelledby="menu-0-button"
@@ -44,18 +57,8 @@ export function Events(): JSX.Element {
             </a>
           </div>
           <div class="py-1" role="none">
-            <a href="#" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabIndex="-1" id="menu-0-item-2">
-              Day view
-            </a>
-            <a href="#" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabIndex="-1" id="menu-0-item-3">
-              Week view
-            </a>
-            <a href="#" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabIndex="-1" id="menu-0-item-4">
-              Month view
-            </a>
-            <a href="#" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabIndex="-1" id="menu-0-item-5">
-              Year view
-            </a>
+            <ViewSelectorItem view="Week">Week view</ViewSelectorItem>
+            <ViewSelectorItem view="Month">Month view</ViewSelectorItem>
           </div>
         </div>
       </div>

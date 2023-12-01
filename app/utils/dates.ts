@@ -1,6 +1,26 @@
 import { DateTime } from 'luxon';
 import type { CalendarView } from '~/types';
 
+export function getMonthInWeekBlocks(startDate: Date): DateTime[][] {
+  const weeks = [];
+  const firstMonday = DateTime.fromJSDate(getFirstMonday(startDate, 'Month'));
+  const lastMonday = getLast7DaysOfMonth(startDate);
+
+  for (
+    let weekStart = firstMonday;
+    weekStart <= DateTime.fromISO(lastMonday[0]);
+    weekStart = weekStart.plus({ days: 7 })
+  ) {
+    const week = [];
+    for (let day = 0; day < 7; day++) {
+      week.push(weekStart.plus({ days: day }));
+    }
+    weeks.push(week);
+  }
+
+  return weeks;
+}
+
 export function getFirstMonday(requestedDate: Date, currentView: CalendarView): Date {
   const startDate = DateTime.fromJSDate(requestedDate);
 
