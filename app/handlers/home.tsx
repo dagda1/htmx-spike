@@ -10,7 +10,7 @@ export async function home(context: HandlerContext): Promise<Response> {
   }
 
   return context.render(
-    <AppShell>
+    <AppShell topNav="hidden">
       <HomePage />
     </AppShell>,
   );

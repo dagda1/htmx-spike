@@ -4,9 +4,10 @@ import { PageLayout } from './PageLayout';
 
 interface LayoutProps {
   children: Child;
+  topNav?: 'visible' | 'hidden';
 }
 
-export function AppShell({ children }: LayoutProps): JSX.Element {
+export function AppShell({ topNav, children }: LayoutProps): JSX.Element {
   return (
     <html class="h-full">
       <head>
@@ -20,7 +21,7 @@ export function AppShell({ children }: LayoutProps): JSX.Element {
         <meta name="description" content="Developer Events" />
       </head>
       <body class="h-full" hx-boost="true">
-        <PageLayout>{children}</PageLayout>
+        <PageLayout topNav={topNav}>{children}</PageLayout>
       </body>
     </html>
   );

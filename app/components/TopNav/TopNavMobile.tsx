@@ -1,4 +1,4 @@
-import { MenuItems } from './menuItems';
+import { MenuItems } from '../MenuItems/menuItems';
 
 export function TopNavMobile(): JSX.Element {
   return (
