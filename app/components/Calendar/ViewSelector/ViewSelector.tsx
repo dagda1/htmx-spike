@@ -38,8 +38,8 @@ export function ViewSelector(): JSX.Element {
         <div class="py-1" role="none">
           {/* <ViewSelectorItem>Day View</ViewSelectorItem> */}
           {/* Active: "bg-gray-100 text-gray-900", Not Active: "text-gray-700" -->*/}
-          <ViewSelectorItem view="Week">Week view</ViewSelectorItem>
-          <ViewSelectorItem view="Month">Month view</ViewSelectorItem>
+          <ViewSelectorItem view="week">Week view</ViewSelectorItem>
+          <ViewSelectorItem view="month">Month view</ViewSelectorItem>
           {/* <ViewSelectorItem>Year view</ViewSelectorItem> */}
         </div>
       </div>

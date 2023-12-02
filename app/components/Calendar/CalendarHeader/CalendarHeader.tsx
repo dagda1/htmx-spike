@@ -1,6 +1,6 @@
 import { DateTime } from 'luxon';
-import { Events } from '../Events/Events';
-import { ViewSelector } from '../ViewSelector/ViewSelector';
+// import { Events } from '../Events/Events';
+// import { ViewSelector } from '../ViewSelector/ViewSelector';
 import { DefaultView, LongMonth, LongYear } from '~/constants';
 import DateNavigator from '../DateNavigator/DateNavigator';
 import { useRequestContext } from 'hono/jsx-renderer';
@@ -19,8 +19,8 @@ export function CalendarHeader({ startDate }: CalendarHeaderProps): JSX.Element 
   const monthName = start.toFormat(LongMonth);
   const year = start.toFormat(LongYear);
 
-  const previous = currentView === 'Week' ? { weeks: -1 } : { months: -1 };
-  const next = currentView === 'Week' ? { weeks: 1 } : { months: 1 };
+  const previous = currentView === 'week' ? { weeks: -1 } : { months: -1 };
+  const next = currentView === 'week' ? { weeks: 1 } : { months: 1 };
 
   return (
     <header class="flex flex-none items-center justify-between border-b border-gray-200 px-6 py-4">
@@ -34,7 +34,7 @@ export function CalendarHeader({ startDate }: CalendarHeaderProps): JSX.Element 
           previous={DateTime.fromJSDate(startDate).plus(previous).toJSDate()}
           next={DateTime.fromJSDate(startDate).plus(next).toJSDate()}
         />
-        <div class="hidden md:ml-4 md:flex md:items-center">
+        {/* <div class="hidden md:ml-4 md:flex md:items-center">
           <ViewSelector />
           <div class="ml-6 h-6 w-px bg-gray-300"></div>
           <button
@@ -47,7 +47,7 @@ export function CalendarHeader({ startDate }: CalendarHeaderProps): JSX.Element 
             Add event
           </button>
         </div>
-        <Events />
+        <Events /> */}
       </div>
     </header>
   );

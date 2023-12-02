@@ -69,8 +69,8 @@ export function Events(): JSX.Element {
             </a>
           </div>
           <div class="py-1" role="none">
-            <ViewSelectorItem view="Week">Week view</ViewSelectorItem>
-            <ViewSelectorItem view="Month">Month view</ViewSelectorItem>
+            <ViewSelectorItem view="week">Week view</ViewSelectorItem>
+            <ViewSelectorItem view="month">Month view</ViewSelectorItem>
           </div>
         </div>
       </div>

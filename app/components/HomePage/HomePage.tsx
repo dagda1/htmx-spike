@@ -2,11 +2,13 @@ import { MenuItems } from '../MenuItems/menuItems';
 
 export function HomePage(): JSX.Element {
   return (
-    <div class="bg-white px-6 py-24 sm:py-32 lg:px-8 h-full" style={{ border: '10px solid green' }}>
+    <div class="bg-white px-6 py-24 sm:py-32 lg:px-8 h-full">
       <div class="mx-auto max-w-2xl text-center">
-        <h1 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">Elder</h1>
+        <h1 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">ELDER</h1>
       </div>
+      <div></div>
       <div class="flex justify-center items-center flex-col w-full">
+        <img src="https://placehold.co/400x200" alt="placeholder" />
         <div class="-left-8 top-full z-10 mt-3 w-screen max-w-md overflow-hidden rounded-3xl bg-white shadow-lg ring-1 ring-gray-900/5">
           <div class="p-4">
             {MenuItems.map((m) => (
@@ -23,7 +25,7 @@ export function HomePage(): JSX.Element {
                 </div>
               </div>
             ))}
-          </div>
+          </div> 
         </div>
       </div>
     </div>

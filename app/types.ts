@@ -15,7 +15,7 @@ export type CalendarEvent = {
 
 export type CalendarEventChanges = Omit<CalendarEvent, 'id' | 'createdAt' | 'updatedAt'>;
 
-export type CalendarView = 'Week' | 'Month';
+export type CalendarView = 'week' | 'month' | 'events';
 
 export type HandlerContext = Context<{ Variables: ContextVars }>;
 

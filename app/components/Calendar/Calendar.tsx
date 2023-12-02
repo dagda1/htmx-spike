@@ -1,13 +1,15 @@
 import { parseShortDate } from '~/utils/dates';
 import WeekCalendar from './WeekCalendar/WeekCalendar';
-import type { CalendarView } from '~/types';
+import type { CalendarProps, CalendarView } from '~/types';
 import { MonthCalendar } from './MonthCalendar/MonthCalendar';
 import { useRequestContext } from 'hono/jsx-renderer';
 import { DefaultView } from '~/constants';
+import { EventCalendar } from './EventCalendar/EventCalendar';
 
-const Views: Record<CalendarView, typeof WeekCalendar | typeof MonthCalendar> = {
-  ['Week']: WeekCalendar,
-  ['Month']: MonthCalendar,
+const Views: Record<CalendarView, (props: CalendarProps) => JSX.Element> = {
+  ['week']: WeekCalendar,
+  ['month']: MonthCalendar,
+  ['events']: EventCalendar,
 } as const;
 
 export function Calendar(): JSX.Element {

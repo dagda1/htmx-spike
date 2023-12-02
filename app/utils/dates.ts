@@ -1,9 +1,21 @@
 import { DateTime } from 'luxon';
 import type { CalendarView } from '~/types';
 
+export function getShortWeekdays(): string[][] {
+  const weekdays: string[][] = [];
+  for (let i = 1; i <= 7; i++) {
+    // Luxon uses 1 for Monday, 2 for Tuesday, etc.
+    const day = DateTime.local().set({ weekday: i }).toFormat('ccc');
+
+    weekdays.push([day.substring(0, 1), day.substring(1)]); // 'ccc' formats the day to 'Mon', 'Tue', etc.
+  }
+
+  return weekdays;
+}
+
 export function getMonthInWeekBlocks(startDate: Date): DateTime[][] {
   const weeks = [];
-  const firstMonday = DateTime.fromJSDate(getFirstMonday(startDate, 'Month'));
+  const firstMonday = DateTime.fromJSDate(getFirstMonday(startDate, 'month'));
   const lastMonday = getLast7DaysOfMonth(startDate);
 
   for (
@@ -24,7 +36,7 @@ export function getMonthInWeekBlocks(startDate: Date): DateTime[][] {
 export function getFirstMonday(requestedDate: Date, currentView: CalendarView): Date {
   const startDate = DateTime.fromJSDate(requestedDate);
 
-  if (currentView === 'Week') {
+  if (currentView === 'week') {
     startDate.startOf('week').toJSDate();
   }
 
