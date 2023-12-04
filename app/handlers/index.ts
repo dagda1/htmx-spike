@@ -1,2 +1,2 @@
-export { getEvents } from './get-events';
+export { connect } from './connect';
 export { home } from './home';

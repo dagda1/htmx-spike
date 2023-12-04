@@ -12,7 +12,7 @@ interface MenuItem {
 }
 export const MenuItems: MenuItem[] = [
   {
-    href: '/events',
+    href: '/connect',
     content: 'Code and Connect Events',
     icon: <ConnectIcon />,
     description: 'description of events',

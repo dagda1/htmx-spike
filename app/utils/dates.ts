@@ -1,6 +1,29 @@
 import { DateTime } from 'luxon';
 import type { CalendarView } from '~/types';
 
+export function formatWithOrdinal(date: Date): string {
+  const dt = DateTime.fromJSDate(date);
+  const formattedDate = dt.toFormat("MMMM d, yyyy 'at' h:mm a");
+  const day = dt.day;
+  const ordinal = (day: number) => {
+    if (day > 3 && day < 21) {
+      return 'th';
+    }
+    switch (day % 10) {
+      case 1:
+        return 'st';
+      case 2:
+        return 'nd';
+      case 3:
+        return 'rd';
+      default:
+        return 'th';
+    }
+  };
+
+  return formattedDate.replace(/d/, day + ordinal(day));
+}
+
 export function getShortWeekdays(): string[][] {
   const weekdays: string[][] = [];
   for (let i = 1; i <= 7; i++) {

@@ -1,17 +1,17 @@
 import type { HandlerContext } from '~/types';
 import { AppShell } from '~/Layouts/AppShell';
-import { Events } from '~/components/Events/Events';
+import { Connect } from '~/Pages/Connect/Connect';
 
-export async function getEvents(c: HandlerContext): Promise<Response> {
+export async function connect(c: HandlerContext): Promise<Response> {
   const trigger = c.req.header('HX-Trigger');
 
   if (trigger) {
-    return c.render(<Events />);
+    return c.render(<Connect />);
   }
 
   return c.render(
     <AppShell>
-      <Events />
+      <Connect />
     </AppShell>,
   );
 }
