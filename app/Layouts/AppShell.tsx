@@ -20,7 +20,7 @@ export function AppShell({ topNav, children }: LayoutProps): JSX.Element {
         <link rel="stylesheet" href="/static/tailwind.css" />
         <meta name="description" content="Developer Events" />
       </head>
-      <body class="h-full" hx-boost="true">
+      <body class="h-full bg-white" hx-boost="true">
         <PageLayout topNav={topNav}>{children}</PageLayout>
       </body>
     </html>

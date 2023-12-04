@@ -1,4 +1,5 @@
 import type { Child } from 'hono/jsx';
+import { Container } from '~/components/Container/Container';
 import { TopNav } from '~/components/TopNav/TopNav';
 
 interface PageLayoutProps {
@@ -8,9 +9,15 @@ interface PageLayoutProps {
 export function PageLayout({ topNav = 'visible', children }: PageLayoutProps): JSX.Element {
   return (
     <div class="min-h-full">
-      {topNav === 'visible' && <TopNav />}
+      {topNav === 'visible' && (
+        <header>
+          <Container>
+            <TopNav />
+          </Container>
+        </header>
+      )}
       <main>
-        <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">{children}</div>
+        <Container>{children}</Container>
       </main>
     </div>
   );

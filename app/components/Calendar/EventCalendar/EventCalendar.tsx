@@ -6,8 +6,8 @@ import { getMonthInWeekBlocks } from '~/utils/dates';
 import { UpcomingEvents } from './UpcomingEvents';
 
 const calendarCss = {
-  previousMonth: 'bg-gray-50 py-1.5 text-gray-400 hover:bg-gray-100 focus:z-10',
-  currentMonth: 'bg-white py-1.5 text-gray-900 hover:bg-gray-100 focus:z-10',
+  currentMonth: 'bg-gray-50 py-1.5 text-gray-400 hover:bg-gray-100 focus:z-10',
+  previousMonth: 'bg-white py-1.5 text-gray-900 hover:bg-gray-100 focus:z-10',
   todayMonth: 'text-white',
   todayTime: 'mx-auto flex h-7 w-7 items-center justify-center rounded-full bg-gray-900 font-semibold text-white',
 } as const;

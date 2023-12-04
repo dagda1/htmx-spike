@@ -1,45 +1,69 @@
+import { useRequestContext } from 'hono/jsx-renderer';
 import { MenuItems } from '../MenuItems/menuItems';
+import cs from 'classnames';
+import { MobileMenuButton } from './MobileMenuButton';
 
 export function TopNavDesktop(): JSX.Element {
+  const context = useRequestContext();
+
+  const currentUrl = new URL(context.req.url);
+
   return (
-    <nav class="flex items-center justify-between p-6 lg:px-8" aria-label="Global">
-      <div class="flex lg:flex-1">
-        <a href="#" class="-m-1.5 p-1.5">
-          <span class="sr-only">Your Company</span>
-          <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="" />
-        </a>
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="flex h-16 justify-between">
+        <div class="flex">
+          <div class="flex flex-shrink-0 items-center">
+            <img
+              class="block h-8 w-auto lg:hidden"
+              src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
+              alt="Your Company"
+            />
+            <img
+              class="hidden h-8 w-auto lg:block"
+              src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
+              alt="Your Company"
+            />
+          </div>
+          <div class="hidden sm:-my-px sm:ml-6 sm:flex sm:space-x-8">
+            {MenuItems.map((m) => {
+              const selected = currentUrl.pathname.includes(m.href);
+              return (
+                <a
+                  href={m.href}
+                  class={cs('inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium', {
+                    ['border-indigo-500 text-gray-900']: selected,
+                    ['border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700']: !selected,
+                  })}
+                  aria-current="page"
+                >
+                  {m.content}
+                </a>
+              );
+            })}
+          </div>
+        </div>
+        <div class="hidden sm:ml-6 sm:flex sm:items-center">
+          {/* Profile dropdown */}
+          <div class="relative ml-3">
+            <div>
+              <button
+                type="button"
+                class="relative flex max-w-xs items-center rounded-full bg-white text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                id="user-menu-button"
+                aria-expanded="false"
+                aria-haspopup="true"
+              >
+                <span class="absolute -inset-1.5"></span>
+                <span class="sr-only">Create PR</span>
+                <img class="h-8 w-8 rounded-full" src="/static/github.png" alt="" />
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="-mr-2 flex items-center sm:hidden">
+          <MobileMenuButton />
+        </div>
       </div>
-      <div class="flex lg:hidden">
-        <button
-          type="button"
-          class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
-          _="on click remove .hidden from #top-nav-mobile then add .block to #top-nav-mobile"
-        >
-          <span class="sr-only">Open main menu</span>
-          <svg
-            class="h-6 w-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            aria-hidden="true"
-          >
-            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-          </svg>
-        </button>
-      </div>
-      <div class="hidden lg:flex lg:gap-x-12">
-        {MenuItems.map((m) => (
-          <a href={m.href} class="text-sm font-semibold leading-6 text-gray-900">
-            {m.content}
-          </a>
-        ))}
-      </div>
-      <div class="hidden lg:flex lg:flex-1 lg:justify-end">
-        <a href="#" class="text-sm font-semibold leading-6 text-gray-900">
-          Log in <span aria-hidden="true">&rarr;</span>
-        </a>
-      </div>
-    </nav>
+    </div>
   );
 }
