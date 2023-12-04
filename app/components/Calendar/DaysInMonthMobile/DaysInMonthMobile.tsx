@@ -45,7 +45,10 @@ export function DaysInMonthMobile({
                 [todayMonth]: today,
               })}
             >
-              <time class={cs({ [todayTime]: today })} datetime={d.toFormat('yyyy-MM-dd')}>
+              <time
+                class={cs('mx-auto flex h-7 w-7 items-center justify-center rounded-full', { [todayTime]: today })}
+                datetime={d.toFormat('yyyy-MM-dd')}
+              >
                 {d.toFormat('d')}
               </time>
               <span class="sr-only">0 events</span>
