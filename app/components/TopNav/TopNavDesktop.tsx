@@ -1,13 +1,9 @@
-import { useRequestContext } from 'hono/jsx-renderer';
 import { MenuItems } from '../MenuItems/menuItems';
 import cs from 'classnames';
 import { MobileMenuButton } from './MobileMenuButton';
+import type { TopNavProps } from './types';
 
-export function TopNavDesktop(): JSX.Element {
-  const context = useRequestContext();
-
-  const currentUrl = new URL(context.req.url);
-
+export function TopNavDesktop({ currentUrl }: TopNavProps): JSX.Element {
   return (
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="flex h-16 justify-between">
@@ -26,7 +22,7 @@ export function TopNavDesktop(): JSX.Element {
           </div>
           <div class="hidden sm:-my-px sm:ml-6 sm:flex sm:space-x-8">
             {MenuItems.map((m) => {
-              const selected = currentUrl.pathname.includes(m.href);
+              const selected = currentUrl.includes(m.href);
               return (
                 <a
                   href={m.href}

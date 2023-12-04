@@ -8,7 +8,7 @@ interface PageLayoutProps {
 }
 export function PageLayout({ topNav = 'visible', children }: PageLayoutProps): JSX.Element {
   return (
-    <div class="min-h-full">
+    <div class="relative mx-auto w-full max-w-container px-4 sm:px-6 lg:px-8 h-full">
       {topNav === 'visible' && (
         <header>
           <Container>

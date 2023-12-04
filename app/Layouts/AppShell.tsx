@@ -9,7 +9,7 @@ interface LayoutProps {
 
 export function AppShell({ topNav, children }: LayoutProps): JSX.Element {
   return (
-    <html class="h-full">
+    <html class="h-full bg-[color:var(--html-bg-color,theme(colors.white))] js-focus-visible">
       <head>
         <title>{DefaultTitle}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -20,7 +20,7 @@ export function AppShell({ topNav, children }: LayoutProps): JSX.Element {
         <link rel="stylesheet" href="/static/tailwind.css" />
         <meta name="description" content="Developer Events" />
       </head>
-      <body class="h-full bg-white" hx-boost="true">
+      <body class="font-sans antialiased text-gray-600 min-h-full flex flex-col [overflow-anchor:none]" hx-boost="true">
         <PageLayout topNav={topNav}>{children}</PageLayout>
       </body>
     </html>

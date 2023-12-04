@@ -5,12 +5,14 @@ export function MobileMenuButton(): JSX.Element {
       class="relative inline-flex items-center justify-center rounded-md bg-white p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
       aria-controls="mobile-menu"
       aria-expanded="false"
+      _="on click toggle between .hidden and .block on .mobile-menu-target"
     >
       <span class="absolute -inset-0.5"></span>
       <span class="sr-only">Open main menu</span>
       {/* Menu open: "hidden", Menu closed: "block" */}
       <svg
-        class="block h-6 w-6"
+        id="mobile-menu-open"
+        class="block h-6 w-6 mobile-menu-target"
         fill="none"
         viewBox="0 0 24 24"
         stroke-width="1.5"
@@ -21,7 +23,8 @@ export function MobileMenuButton(): JSX.Element {
       </svg>
       {/* Menu open: "block", Menu closed: "hidden" */}
       <svg
-        class="hidden h-6 w-6"
+        id="mobile-menu-closed"
+        class="hidden h-6 w-6 mobile-menu-target"
         fill="none"
         viewBox="0 0 24 24"
         stroke-width="1.5"
