@@ -21,6 +21,9 @@ export default {
       fontFamily: {
         sans: ['Inter var', ...defaultTheme.fontFamily.sans],
       },
+      fontSize: {
+        h2: '2rem',
+      },
     },
   },
   plugins: [typography, aspectRatio],

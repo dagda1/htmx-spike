@@ -3,7 +3,7 @@ import { DefaultView } from '~/constants';
 import type { CalendarView } from '~/types';
 import { ViewSelectorItem } from '../ViewSelector/ViewSelectorItem';
 
-export function Events(): JSX.Element {
+export function CalendarEvents(): JSX.Element {
   const context = useRequestContext();
 
   const currentView = (context.req.query('view') ?? DefaultView) as CalendarView;
